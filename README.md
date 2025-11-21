@@ -1,163 +1,101 @@
-# OS Lab 5 - Quick Reference Guide
+# Process Management & Compilation Lab
 
-##  Quick Commands
+[![Language](https://img.shields.io/badge/language-C-blue.svg)](https://en.wikipedia.org/wiki/C_(programming_language))
+[![OS](https://img.shields.io/badge/os-Linux-green.svg)](https://www.linux.org/)
+
+## Overview
+
+Educational project demonstrating fundamental OS concepts through practical C implementations.
+
+## Structure
+
+```
+assignment2_OS_mo/
+├── process_creation.c    # Exercise 1: fork() system call
+├── file1.c              # Exercise 5: Linker demo (part 1)
+├── file2.c              # Exercise 5: Linker demo (part 2)
+├── simple_program.c     # Exercise 6: Loader demo
+├── Makefile            # Build automation
+└── README.md
+```
+
+## Build Instructions
 
 ```bash
-# Setup
-git clone https://github.com/mufargella/assignment2_OS_mo.git && cd assignment2_OS_mo
+# Build all executables
+make all
 
-# Build & Run (all in one)
-make all && make run
+# Build specific target
+make process_creation
+make output_program
+make simple_program
 
-# Individual builds
-make process_creation && ./process_creation
-make output_program && ./output_program
-make simple_program && ./simple_program
+# Execute all programs
+make run
 
-# Cleanup
+# Clean build artifacts
 make clean
 ```
 
-##  Files Overview
+## Implementation Details
 
+### 1. Process Creation (`process_creation.c`)
+
+Demonstrates `fork()` system call behavior:
+- Parent process continues execution
+- Child process is created with separate PID
+- Both processes run concurrently
+
+**Key Functions**: `fork()`, `getpid()`
+
+### 2. Linker Example (`file1.c` + `file2.c`)
+
+Shows linking phase of compilation:
+- Separate compilation units
+- Symbol resolution across files
+- External function references
+
+**Compilation Steps**:
+```bash
+gcc -c file1.c -o file1.o
+gcc -c file2.c -o file2.o
+gcc file1.o file2.o -o output_program
 ```
-process_creation.c  → fork() demo
-file1.c + file2.c   → linker demo
-simple_program.c    → loader demo
-Makefile           → build automation
+
+### 3. Loader Example (`simple_program.c`)
+
+Illustrates program loading mechanism:
+- Dynamic library dependencies
+- Memory mapping
+- Execution initialization
+
+**Inspect loaded libraries**:
+```bash
+ldd ./simple_program
 ```
 
-##  Key Concepts
-
-### fork() Cheat Sheet
-
-```c
-pid_t pid = fork();
-
-if (pid < 0) {
-    // Error
-} else if (pid == 0) {
-    // Child process
-} else {
-    // Parent process (pid = child's PID)
-}
-```
-
-**Result**: Creates exact copy of calling process
-
-### Compilation Pipeline
-
-```
-.c → [Preprocessor] → .i → [Compiler] → .s → [Assembler] → .o → [Linker] → executable
-```
+## Technical Notes
 
 ### Linker vs Loader
 
-| | Linker | Loader |
-|---|--------|--------|
-| **When** | Compile-time | Run-time |
-| **Input** | `*.o` files | `executable` |
-| **Output** | `executable` | Running process |
-| **Job** | Combine & resolve symbols | Load into memory & start |
+| Aspect | Linker | Loader |
+|--------|--------|--------|
+| **Phase** | Compile-time | Run-time |
+| **Input** | Object files | Executable |
+| **Output** | Executable | Process in memory |
+| **Task** | Resolve symbols | Load & execute |
 
-## 🔍 Debug Commands
+## Environment
 
-```bash
-# See linked libraries
-ldd ./simple_program
+- **Compiler**: GCC (GNU Compiler Collection)
+- **OS**: Linux/Unix with POSIX support
+- **Standard**: C99 or later
 
-# See system calls
-strace ./simple_program
+## Author
 
-# See compiled symbols
-nm ./output_program
+Lab 5 Assignment - Operating Systems Course
 
-# See file type
-file ./process_creation
+## License
 
-# See assembly
-objdump -d ./simple_program
-```
-
-##  Expected Outputs
-
-### process_creation
-```
-This is the parent process. PID: 1234
-This is the child process. PID: 1235
-```
-
-### output_program
-```
-Hello from file1!
-```
-
-### simple_program
-```
-This is a simple program.
-```
-
-##  Troubleshooting
-
-| Problem | Solution |
-|---------|----------|
-| `gcc: command not found` | `sudo apt install build-essential` |
-| `Permission denied` | `chmod +x ./program_name` |
-| `No such file` | Run `make all` first |
-| Makefile errors | Check tabs (not spaces) |
-
-##  Manual Compilation
-
-```bash
-# Process creation
-gcc process_creation.c -o process_creation
-
-# Linker example (step by step)
-gcc -c file1.c
-gcc -c file2.c
-gcc file1.o file2.o -o output_program
-
-# Simple program
-gcc simple_program.c -o simple_program
-```
-
-##  Quick Definitions
-
-**Process**: Running program instance  
-**PID**: Process ID (unique number)  
-**Fork**: Create child process (clone)  
-**Linker**: Combines `.o` files  
-**Loader**: Starts executable  
-**Object File**: Compiled but not linked  
-**Symbol**: Function/variable name  
-
-##  Learning Checklist
-
-- [ ] Understand what `fork()` returns
-- [ ] Explain difference between parent and child
-- [ ] Know what linker does
-- [ ] Know what loader does
-- [ ] Can manually compile multi-file program
-- [ ] Can use `ldd` to see dependencies
-- [ ] Understand Makefile basics
-
-##  Try These
-
-```bash
-# See all processes
-ps aux | grep simple_program
-
-# Run in background
-./simple_program &
-
-# Time execution
-time ./process_creation
-
-# Watch memory usage
-/usr/bin/time -v ./simple_program
-```
-
----
-
-** Tip**: Use `man fork` or `man gcc` for detailed documentation!
+MIT License - Educational Use
 ```
