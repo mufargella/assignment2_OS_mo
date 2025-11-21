@@ -1,6 +1,6 @@
 # OS Lab 5 - Quick Reference Guide
 
-## ⚡ Quick Commands
+##  Quick Commands
 
 ```bash
 # Setup
@@ -18,7 +18,7 @@ make simple_program && ./simple_program
 make clean
 ```
 
-## 📂 Files Overview
+##  Files Overview
 
 ```
 process_creation.c  → fork() demo
@@ -27,7 +27,7 @@ simple_program.c    → loader demo
 Makefile           → build automation
 ```
 
-## 🔑 Key Concepts
+##  Key Concepts
 
 ### fork() Cheat Sheet
 
@@ -79,7 +79,7 @@ file ./process_creation
 objdump -d ./simple_program
 ```
 
-## 📊 Expected Outputs
+##  Expected Outputs
 
 ### process_creation
 ```
@@ -97,7 +97,7 @@ Hello from file1!
 This is a simple program.
 ```
 
-## 🐛 Troubleshooting
+##  Troubleshooting
 
 | Problem | Solution |
 |---------|----------|
@@ -106,7 +106,7 @@ This is a simple program.
 | `No such file` | Run `make all` first |
 | Makefile errors | Check tabs (not spaces) |
 
-## 💾 Manual Compilation
+##  Manual Compilation
 
 ```bash
 # Process creation
@@ -121,7 +121,7 @@ gcc file1.o file2.o -o output_program
 gcc simple_program.c -o simple_program
 ```
 
-## 📖 Quick Definitions
+##  Quick Definitions
 
 **Process**: Running program instance  
 **PID**: Process ID (unique number)  
@@ -131,7 +131,7 @@ gcc simple_program.c -o simple_program
 **Object File**: Compiled but not linked  
 **Symbol**: Function/variable name  
 
-## 🎯 Learning Checklist
+##  Learning Checklist
 
 - [ ] Understand what `fork()` returns
 - [ ] Explain difference between parent and child
@@ -141,7 +141,7 @@ gcc simple_program.c -o simple_program
 - [ ] Can use `ldd` to see dependencies
 - [ ] Understand Makefile basics
 
-## 🚀 Try These
+##  Try These
 
 ```bash
 # See all processes
@@ -159,5 +159,5 @@ time ./process_creation
 
 ---
 
-**📌 Tip**: Use `man fork` or `man gcc` for detailed documentation!
+** Tip**: Use `man fork` or `man gcc` for detailed documentation!
 ```
